@@ -1,19 +1,25 @@
 #config variables
 
 import os
+from decouple import config
 
 BASE_DIR=os.path.dirname(os.path.realpath(__file__))
 
-print(BASE_DIR)
 
 class Config:
-    pass
+    SQLALCHEMY_TRACK_MODIFICATIONS=False
+    SECRET_KEY='f90abf5a336b9b9bb5e92f4a'
 
 class DevConfig(Config):
-    pass
+    SQLALCHEMY_DATABASE_URI='sqlite:///'+os.path.join(BASE_DIR,'dev.db')
+   # SQLALCHEMY_ECHO=True
+    DEBUG=True
 
 class TestConfig(Config):
-    pass
+    SQLALCHEMY_DATABASE_URI='sqlite:///'+os.path.join(BASE_DIR,'test.db')
+    SQLALCHEMY_ECHO=True
+    DEBUG=True
 
 class ProdConfig(Config):
-    pass
+    SQLALCHEMY_DATABASE_URI=config('DATABASE_URI')
+    DEBUG=True
