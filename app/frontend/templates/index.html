@@ -1,49 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced To do list App</title>
-    <link rel="stylesheet" href="static/css/main.css">
-</head>
-<body>
-  <nav>
-    <div class="color-picker">
-        <h1 class="white-text">To Do List &#9787;</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todoist</title>
+    <link rel="stylesheet" href="static/css/main.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav>
+      <div class="color-picker">
+        <h1 class="white-text">Todoist &#9787;</h1>
         <form action="" id="color-form">
-            <input type="color" name="color" id="color">
-            <input type="submit" value="Change Background" class="mybtn">
+          <input type="color" name="color" id="color" />
+          <input type="submit" value="Change Background" class="mybtn" />
         </form>
         <div class="clear">
-            <button id="clear-btn" class="mybtn">
-                Clear Complete Tasks &times;
-            </button>
+          <button id="clear-btn" class="mybtn">
+            Clear Complete Tasks &times;
+          </button>
         </div>
         <div class="completed">
-            <h3>Completed Tasks: <span id="complete-tasks">0</span></h3>
+          <h3>Completed Tasks: <span id="complete-tasks">0</span></h3>
         </div>
-    </div>
-    <div class="tasks-input">
+      </div>
+      <div class="tasks-input">
         <form action="" id="task-addition-form">
-         <input type="text" name="task" id="task" class="myform">
-         <input type="submit" value="add" class="mybtn">
+          <input type="text" name="task" id="task" class="myform" />
+          <input type="submit" value="add" class="mybtn" />
         </form>
-     </div>
-  </nav>
+      </div>
+    </nav>
     <div class="container">
-     
-        <div class="tasks">
-            <div class="no-tasks">
-                <center ">
-                    <h1>There are no tasks yet.  &#9785</h1>
-                </center>
-            </div>
+      <div class="tasks">
+        {% for todo in todos %}
+        <div class="task-item">
+          <input type="checkbox" name="complete" id="complete" />
+          <h4 class="task-name">{{todo.name}}</h4>
+          <div class="details">
+            <a href="#" class="detail-btn open"> &#9776;</a>
+            <b><a href="#" class="close-btn white-text"> &times;</a></b>
+          </div>
         </div>
-       
-       
+        <div class="detail">
+          <form action="" class="detail-form">
+            <div class="details-container">
+              <div class="notes">
+                <h2>Task <span class="task-id">{{todo.id}}</span></h2>
+                <br>
+                <div class="notes">
+                  <label for="notes">What to do</label>
+                  <textarea
+                    name="desc"
+                    id="notes"
+                    cols="30"
+                    rows="10"
+                    placeholder="Enter your description"
+                  >
+  {{todo.desc}}</textarea
+                  >
+                </div>
+              </div>
+              <div class="others">
+                <div class="priority">
+                  <label for="priority">Priority</label>
+                  <select name="priority" id="priority">
+                    <option value="none" value="{{todo.priority}}"></option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                </div>
+                <div class="time">
+                  <label for="time">Time</label>
+                  <input type="date" name="time" id="time" value="{{todo.time}}"/>
+                </div>
+                <div class="del">
+                  <a href="#" id="del-btn" class="del-btn"> Delete</a>
+                  <a href="#" class="succ-btn">Completed</a>
+                  <button class="save-btn">Save</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        {% endfor %}
+      </div>
     </div>
- 
+
     <script src="static/js/index.js"></script>
-</body>
+  </body>
 </html>
+
 

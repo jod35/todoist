@@ -6,7 +6,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 html{
     overflow-x: hidden;
@@ -17,6 +17,7 @@ nav{
     width: 100%;
     top: 0;
     position: fixed;
+    z-index: 2;
 }
 .color-picker{
     display: flex;
@@ -40,6 +41,8 @@ nav{
 .container{
     width: 90%;
     padding: 0;
+    position: relative;
+    top: 20px;
     margin: auto;
 }
 
@@ -128,12 +131,12 @@ nav{
 }
 .notes textarea{
     width: 100%;
-    background-color: inherit;
+    padding: 10px;
     border:none;
-    color: white;
+
 }
 .others{
-    width: 30%;
+    width: 40%;
 }
 .priority{
     padding: 10px;
@@ -166,7 +169,7 @@ nav{
 .del-btn{
     background-color: red;
     color: white;
-    padding: 16px;
+    padding: 10px;
     border-radius: 7px;
     text-decoration: none;
     
@@ -174,9 +177,17 @@ nav{
 .succ-btn{
     background-color: green;
     color: white;
-    padding: 16px;
+    padding: 10px;
     border-radius: 7px;
     text-decoration: none;
+}
+.save-btn{
+    background-color: dodgerblue;
+    color: white;
+    padding: 10px;
+    border-radius: 7px;
+    text-decoration: none;
+    border: none;
 }
 .no-tasks{
     display: flex;

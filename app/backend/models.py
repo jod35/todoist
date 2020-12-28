@@ -2,9 +2,12 @@ from ..utils.database import db
 
 class Todo(db.Model):
     id=db.Column(db.Integer(),primary_key=True)
-    name=db.Column(db.Text,nullable=False)
-    desc=db.Column(db.Text,nullable=False)
+    name=db.Column(db.Text)
+    desc=db.Column(db.Text)
+    priority=db.Column(db.Text())
+    time=db.Column(db.DateTime())
     complete=db.Column(db.Boolean())
+    
 
 
     def __repr__(self):
