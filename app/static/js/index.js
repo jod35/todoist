@@ -1,18 +1,19 @@
-const taskAdditionForm=document.querySelector('#task-addition-form');
-const taskInput=document.querySelector("#task");
-const taskContainer=document.querySelector(".tasks");
-const todos=document.querySelectorAll('.task-item');
-const detailButton=document.querySelectorAll(".detail-btn");
-const detailContainers=document.querySelectorAll(".detail");
-const detailCloseButton=document.querySelectorAll(".close-btn");
-const detailForms=document.querySelectorAll('.detail-form');
-const taskID=document.querySelectorAll(".task-id");
-const taskName=document.querySelectorAll(".task-name");
+const taskAdditionForm = document.querySelector("#task-addition-form");
+const taskInput = document.querySelector("#task");
+const taskContainer = document.querySelector(".tasks");
+const todos = document.querySelectorAll(".task-item");
+const detailButton = document.querySelectorAll(".detail-btn");
+const detailContainers = document.querySelectorAll(".detail");
+const detailCloseButton = document.querySelectorAll(".close-btn");
+const detailForms = document.querySelectorAll(".detail-form");
+const taskID = document.querySelectorAll(".task-id");
+const taskName = document.querySelectorAll(".task-name");
+const colorPicker = document.querySelector("#color-form");
+const priorities=document.querySelectorAll('.priority');
+const completeBtns=document.querySelectorAll('.succ-btn');
 
-taskAdditionForm.addEventListener('submit',(e)=>{
-
-
-    let todoHTML=`
+taskAdditionForm.addEventListener("submit", (e) => {
+  let todoHTML = `
     <div class="task-item">
     <input type="checkbox" name="complete" id="complete" />
     <h4 class="task-name">${taskInput.value}</h4>
@@ -59,83 +60,95 @@ taskAdditionForm.addEventListener('submit',(e)=>{
         </div>
     </div>
     </div>
-`
+`;
 
-    let section=document.createElement('section');
+  let section = document.createElement("section");
 
-    fetch('/api/todos',{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({name:taskInput.value})})
-    .then(res=>res.json())
-    .then((data)=>{
-        console.log(data)
+  fetch("/api/todos", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ name: taskInput.value }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      location.reload();
+    });
+
+  section.innerHTML = todoHTML;
+
+  taskContainer.insertBefore(section, todos[0]);
+
+  e.preventDefault();
+});
+
+for (let j = 0; j < todos.length; j++) {
+  detailButton[j].addEventListener("click", (e) => {
+    detailButton[j].style.display = "none";
+    detailCloseButton[j].style.display = "block";
+    detailContainers[j].style.display = "block";
+  });
+}
+
+for (let k = 0; k < todos.length; k++) {
+  detailCloseButton[k].addEventListener("click", () => {
+    detailContainers[k].style.display = "none";
+    detailCloseButton[k].style.display = "none";
+    detailButton[k].style.display = "block";
+  });
+}
+
+for (let d = 0; d < detailForms.length; d++) {
+  detailForms[d].addEventListener("submit", (e) => {
+    let detailData = new FormData(detailForms[d]);
+
+    let detail = {
+      name: taskName[d].innerText,
+      desc: detailData.get("desc"),
+      priority: detailData.get("priority"),
+      time: detailData.get("time"),
+    };
+
+    let RESOURCE_URL = `/api/todo/${taskID[d].innerText}`;
+
+
+    // give details, time and priority to a todo
+    fetch(RESOURCE_URL, {
+      method: "PATCH",
+      body: JSON.stringify(detail),
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+
+        alert(data.message);
         location.reload();
-    })
-
-    section.innerHTML=todoHTML;
-
-    
-
-    taskContainer.insertBefore(section,todos[0]);
-
-    
+      });
 
 
-
-    e.preventDefault()
-})
-
-
-for(let j =0; j<todos.length; j++){
-    detailButton[j].addEventListener('click',(e)=>{
-        detailButton[j].style.display="none";
-        detailCloseButton[j].style.display="block";
-        detailContainers[j].style.display="block";
-
-
-
-    })
-}
-
-for(let k =0; k < todos.length; k++){
-    detailCloseButton[k].addEventListener('click',()=>{
-        detailContainers[k].style.display="none";
-        detailCloseButton[k].style.display="none";
-        detailButton[k].style.display="block";
-    })
-}
-
-for(let d=0; d<detailForms.length; d++){
-    detailForms[d].addEventListener('submit',(e)=>{
-        let detailData = new FormData(detailForms[d]);
-
-        let detail={
-            name:taskName[d].innerText,
-            desc:detailData.get('desc'),
-            priority:detailData.get('priority'),
-            time:detailData.get('time')
-        }
-
-        let RESOURCE_URL=`/api/todo/${taskID[d].innerText}`
-        
-
-
+    completeBtns[d].addEventListener('click',()=>{
+        taskName[d].style.textDecoration="line-through";
         fetch(
             RESOURCE_URL,
             {
                 method:"PATCH",
-                body:JSON.stringify(detail),
-                headers:{
-                    "content-type":"application/json"
-                }
+                body:JSON.stringify({"complete":true}),
+                headers:{"content-type":"application/json"}
             }
-        )
-        .then(res=>res.json())
-        .then((data)=>{
-            console.log(data);
-
-            alert(data.message);
-            location.reload()
-        })
-        
-        e.preventDefault();
+        ).then(res=>json())
+        .then(data=>console.log(data))
     })
+    e.preventDefault();
+  });
 }
+
+colorPicker.addEventListener("submit", (e) => {
+  document.body.style.backgroundColor = new FormData(colorPicker).get("color");
+
+  e.preventDefault();
+});
+
+
