@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/css/main.css" />
+    <title>Todoist</title>
+    
+  </head>
+  <body>
+    <div class="container">
+      <h1>Todoist</h1>
+      <div class="todo">
+        <form action="">
+          <fieldset>
+            <label for="todo">What you will Do</label>
+            <input
+              type="text"
+              name="name"
+              id="todo-name"
+              class="form-control"
+            />
+          </fieldset>
+          <br />
+          <fieldset>
+            <label for="desc">Description</label>
+            <textarea
+              name="desc"
+              id="todo-desc"
+              cols="30"
+              rows="2"
+              class="form-control"
+            ></textarea>
+          </fieldset>
+          <br />
+          <button type="submit" class="mybtn">Add</button>
+        </form>
+      </div>
+      <div class="todos">
+            
+            {% for todo in todos %}
+                <div class="mybtn">
+                    {{todo.name}}
+                    <input type="checkbox" name="done" id="complete">
+                </div>
+            {% endfor %}
+            
+      </div>
+    </div>
+    <script src="static/js/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+:root{
+    --primary-color:dodgerblue;
+    --gray:gray;
+    --white:white;
+    --black:black;
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+html{
+    background-color: var(--gray);
+}
+
+.container{
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    width: 80%;
+    margin:30px auto;
+    padding: 20px;
+}
+
+.todo{
+    width: 100%;
+    padding: 10px;
+
+}
+fieldset{
+    border: none;
+    padding: 5px;
+}
+.form-control{
+    width: 95%;
+    border: none;
+    padding: 20px;
+    border-radius: 30px;
+    outline: none;
+}
+.mybtn{
+    width: 60%;
+    padding: 20px;
+    text-transform: uppercase;
+    color: var(--white);
+    background-color: var(--black);
+    border:none;
+    cursor: pointer;
+    outline: none;
+    font-weight: bold;
+    width: 95%;
+    border-radius: 30px;
+}
+
+
+@media(max-width:600px){
+    .container{
+        width: 88%;
+    }
+}
