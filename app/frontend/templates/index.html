@@ -1,52 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="static/css/main.css" />
-    <title>Todoist</title>
-    
-  </head>
-  <body>
-    <div class="container">
-      <h1>Todoist</h1>
-      <div class="todo">
-        <form action="">
-          <fieldset>
-            <label for="todo">What you will Do</label>
-            <input
-              type="text"
-              name="name"
-              id="todo-name"
-              class="form-control"
-            />
-          </fieldset>
-          <br />
-          <fieldset>
-            <label for="desc">Description</label>
-            <textarea
-              name="desc"
-              id="todo-desc"
-              cols="30"
-              rows="2"
-              class="form-control"
-            ></textarea>
-          </fieldset>
-          <br />
-          <button type="submit" class="mybtn">Add</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced To do list App</title>
+    <link rel="stylesheet" href="static/css/main.css">
+</head>
+<body>
+  <nav>
+    <div class="color-picker">
+        <h1 class="white-text">To Do List &#9787;</h1>
+        <form action="" id="color-form">
+            <input type="color" name="color" id="color">
+            <input type="submit" value="Change Background" class="mybtn">
         </form>
-      </div>
-      <div class="todos">
-            
-            {% for todo in todos %}
-                <div class="mybtn">
-                    {{todo.name}}
-                    <input type="checkbox" name="done" id="complete">
-                </div>
-            {% endfor %}
-            
-      </div>
+        <div class="clear">
+            <button id="clear-btn" class="mybtn">
+                Clear Complete Tasks &times;
+            </button>
+        </div>
+        <div class="completed">
+            <h3>Completed Tasks: <span id="complete-tasks">0</span></h3>
+        </div>
     </div>
+    <div class="tasks-input">
+        <form action="" id="task-addition-form">
+         <input type="text" name="task" id="task" class="myform">
+         <input type="submit" value="add" class="mybtn">
+        </form>
+     </div>
+  </nav>
+    <div class="container">
+     
+        <div class="tasks">
+            <div class="no-tasks">
+                <center ">
+                    <h1>There are no tasks yet.  &#9785</h1>
+                </center>
+            </div>
+        </div>
+       
+       
+    </div>
+ 
     <script src="static/js/index.js"></script>
-  </body>
+</body>
 </html>
+

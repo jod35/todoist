@@ -11,7 +11,7 @@ class Config:
     SECRET_KEY='f90abf5a336b9b9bb5e92f4a'
 
 class DevConfig(Config):
-    SQLALCHEMY_DATABASE_URI='sqlite:///dev.db'
+    SQLALCHEMY_DATABASE_URI='sqlite:///'+os.path.join(BASE_DIR,'app.db')
    # SQLALCHEMY_ECHO=True
     DEBUG=True
 

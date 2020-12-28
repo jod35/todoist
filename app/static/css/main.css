@@ -1,63 +1,186 @@
 :root{
-    --primary-color:dodgerblue;
-    --gray:gray;
+    --black:rgba(0, 0, 0, 0.596);
     --white:white;
-    --black:black;
 }
-
-
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
 }
 html{
-    background-color: var(--gray);
+    overflow-x: hidden;
+    overflow-y:auto;
 }
-
-.container{
-    background-color: var(--primary-color);
-    color: white;
-    text-align: center;
-    width: 80%;
-    margin:30px auto;
+nav{
+    background-color: var(--black);
+    width: 100%;
+    top: 0;
+    position: fixed;
+}
+.color-picker{
+    display: flex;
+    justify-content: space-between;
     padding: 20px;
 }
+.white-text{
+    color: var(--white);
+}
+.mybtn
+{
+    border: none;
+    background-color: inherit;
+    color: var(--white);
+    border:1px solid var(--white);
+    padding: 10px;
+    font-weight: bolder;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.container{
+    width: 90%;
+    padding: 0;
+    margin: auto;
+}
 
-.todo{
+.detail-btn{
+    text-decoration: none;
+}
+.close{
+    display: none;
+}
+.completed{
+
+    padding: 5px;
+    color: white;
+}
+#color{
+    border: none;
+}
+
+.tasks{
+    margin-top: 180px;
+}
+.tasks-input{
+    background-color: var(--black);
+    padding: 20px;
+}
+#task{
+    width: 90%;
+    margin: auto;
+    padding: 10px;
+}
+.task-item{
+    display: flex;
+    /* border-radius: 10px; */
+    margin:5px;
+    /* cursor: pointer; */
+    color: white;
+    justify-content: space-between;
+    background-color: var(--black);
+    width: 100%;
+    padding: 20px;
+}
+.task-item:hover{
+    background-color: rgba(0, 0, 0, 0.39);
+    color: var(--white);
+}
+
+.tasks-input{
+    position: fixed;
+    top: 80px;
+    width: 100%;
+}
+.details a{
+    color: white;
+    text-decoration: none;
+
+}
+.close-btn{
+    display: none;
+}
+.detail-btn{
+    color: var(--white);
+    font-size: 2.5;
+    font-weight: bold;
+}
+.detail{
+    display: none;
+    color: var(--white);
+    background-color: var(--black)  ;
+    width: 100%;
+    padding: 20px;
+    margin: 0;
+    border-radius: 10px;
+    font-weight: bold;
+    
+}
+.details-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin: auto;
+    width: 100%;
+    /* background-color: inherit; */
+}
+.notes{
+    width:  60%;
+}
+.notes textarea{
+    width: 100%;
+    background-color: inherit;
+    border:none;
+    color: white;
+}
+.others{
+    width: 30%;
+}
+.priority{
+    padding: 10px;
+    margin: 10px;
+}
+
+.priority select{
+    width: 100%;
+
+    padding: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+
+.time{
+    padding: 10px;
+    margin:10px ;
+}
+#time{
     width: 100%;
     padding: 10px;
-
-}
-fieldset{
-    border: none;
-    padding: 5px;
-}
-.form-control{
-    width: 95%;
-    border: none;
-    padding: 20px;
-    border-radius: 30px;
-    outline: none;
-}
-.mybtn{
-    width: 60%;
-    padding: 20px;
-    text-transform: uppercase;
-    color: var(--white);
-    background-color: var(--black);
-    border:none;
-    cursor: pointer;
-    outline: none;
-    font-weight: bold;
-    width: 95%;
-    border-radius: 30px;
+   
 }
 
-
-@media(max-width:600px){
-    .container{
-        width: 88%;
-    }
+.del{
+    padding: 10px;
+    margin: 10px;
+}
+.del-btn{
+    background-color: red;
+    color: white;
+    padding: 16px;
+    border-radius: 7px;
+    text-decoration: none;
+    
+}
+.succ-btn{
+    background-color: green;
+    color: white;
+    padding: 16px;
+    border-radius: 7px;
+    text-decoration: none;
+}
+.no-tasks{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
 }
