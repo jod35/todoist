@@ -6,10 +6,12 @@ const detailButton=document.querySelectorAll(".detail-btn");
 const detailContainers=document.querySelectorAll(".detail");
 const detailCloseButton=document.querySelectorAll(".close-btn");
 const detailForms=document.querySelectorAll('.detail-form');
+const taskID=document.querySelectorAll(".task-id");
+const taskName=document.querySelectorAll(".task-name");
 
 taskAdditionForm.addEventListener('submit',(e)=>{
 
-    console.log(taskInput.value);
+
     let todoHTML=`
     <div class="task-item">
     <input type="checkbox" name="complete" id="complete" />
@@ -63,7 +65,10 @@ taskAdditionForm.addEventListener('submit',(e)=>{
 
     fetch('/api/todos',{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({name:taskInput.value})})
     .then(res=>res.json())
-    .then(data=>console.log(data))
+    .then((data)=>{
+        console.log(data)
+        location.reload();
+    })
 
     section.innerHTML=todoHTML;
 
@@ -71,7 +76,7 @@ taskAdditionForm.addEventListener('submit',(e)=>{
 
     taskContainer.insertBefore(section,todos[0]);
 
-    location.reload();
+    
 
 
 
@@ -103,13 +108,33 @@ for(let d=0; d<detailForms.length; d++){
         let detailData = new FormData(detailForms[d]);
 
         let detail={
+            name:taskName[d].innerText,
             desc:detailData.get('desc'),
             priority:detailData.get('priority'),
             time:detailData.get('time')
         }
 
+        let RESOURCE_URL=`/api/todo/${taskID[d].innerText}`
         
 
+
+        fetch(
+            RESOURCE_URL,
+            {
+                method:"PATCH",
+                body:JSON.stringify(detail),
+                headers:{
+                    "content-type":"application/json"
+                }
+            }
+        )
+        .then(res=>res.json())
+        .then((data)=>{
+            console.log(data);
+
+            alert(data.message);
+            location.reload()
+        })
         
         e.preventDefault();
     })
