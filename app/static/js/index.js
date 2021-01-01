@@ -3,7 +3,7 @@ const taskInput = document.querySelector("#task");
 const taskContainer = document.querySelector(".tasks");
 const todos = document.querySelectorAll(".task-item");
 const detailButton = document.querySelectorAll(".detail-btn");
-const detailContainers = document.querySelectorAll(".detail");
+const detailContainers = document.querySelectorAll(".modal");
 const detailCloseButton = document.querySelectorAll(".close-btn");
 const detailForms = document.querySelectorAll(".detail-form");
 const taskID = document.querySelectorAll(".task-id");
@@ -85,7 +85,7 @@ taskAdditionForm.addEventListener("submit", (e) => {
 });
 
 for (let j = 0; j < todos.length; j++) {
-  detailButton[j].addEventListener("click", (e) => {
+    detailButton[j].addEventListener("click", (e) => {
     detailButton[j].style.display = "none";
     detailCloseButton[j].style.display = "block";
     detailContainers[j].style.display = "block";
@@ -93,7 +93,7 @@ for (let j = 0; j < todos.length; j++) {
 }
 
 for (let k = 0; k < todos.length; k++) {
-  detailCloseButton[k].addEventListener("click", () => {
+    detailCloseButton[k].addEventListener("click", () => {
     detailContainers[k].style.display = "none";
     detailCloseButton[k].style.display = "none";
     detailButton[k].style.display = "block";
@@ -156,6 +156,9 @@ for(let i =0; i < todos.length; i++){
      .then((data)=>{
         alert(data.message);
         todos[i].style.backgroundColor="green";
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
      })
   })
 }

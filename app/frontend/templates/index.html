@@ -25,7 +25,7 @@
           </button>
         </div>
         <div class="completed">
-          <h3>Completed Tasks: <span id="complete-tasks">0</span></h3>
+          <h3>Completed Tasks: <span id="complete-tasks">{{complete}}</span></h3>
         </div>
       </div>
       <div class="tasks-input">
@@ -38,7 +38,11 @@
     <div class="container">
       <div class="tasks">
         {% for todo in todos %}
-        <div class="task-item">
+        <div class="task-item" 
+        {% if todo.complete %}
+          style="background-color: green;"
+        {% endif %}
+          
           <input type="checkbox" name="complete" id="complete" />
           <h4 class="task-name">{{todo.name}}</h4>
           <div class="details">
@@ -46,47 +50,50 @@
             <b><a href="#" class="close-btn white-text"> &times;</a></b>
           </div>
         </div>
-        <div class="detail">
-          <form action="" class="detail-form">
-            <div class="details-container">
-              <div class="notes">
-                <h2>Task <span class="task-id">{{todo.id}}</span></h2>
-                <br>
+        <div class="modal">
+          <div class="detail">
+            <form action="" class="detail-form">
+              <div class="details-container">
                 <div class="notes">
-                  <label for="notes">What to do</label>
-                  <textarea
-                    name="desc"
-                    id="notes"
-                    cols="30"
-                    rows="10"
-                    placeholder="Enter your description"
-                  >
-  {{todo.desc}}</textarea
-                  >
+                  <h2>Task <span class="task-id">{{todo.id}}</span></h2>
+                  <br>
+                  <div class="notes">
+                    <label for="notes">What to do</label>
+                    <textarea
+                      name="desc"
+                      id="notes"
+                      cols="30"
+                      rows="10"
+                      placeholder="Enter your description"
+                    >
+    {{todo.desc}}</textarea
+                    >
+                  </div>
+                </div>
+                <div class="others">
+                  <div class="priority">
+                    <label for="priority">Priority</label>
+                    <select name="priority" id="priority">
+                      <option class="priority" value="{{todo.priority}}">{{todo.value}}</option>
+                      <option class="priority" value="low">Low</option>
+                      <option class="priority" value="medium">Medium</option>
+                      <option class="priority" value="high">High</option>
+                    </select>
+                  </div>
+                  <div class="time">
+                    <label for="time">Time</label>
+                    <input type="date" name="time" id="time" value="{{todo.time}}"/>
+                  </div>
+                  <div class="del">
+                    <a href="#" id="del-btn" class="del-btn"> Delete</a>
+                    <a href="#" class="succ-btn">Completed</a>
+                    <button class="save-btn">Save</button>
+                    <a href="#" class="cancel-btn">Cancel</a>
+                  </div>
                 </div>
               </div>
-              <div class="others">
-                <div class="priority">
-                  <label for="priority">Priority</label>
-                  <select name="priority" id="priority">
-                    <option class="priority" value="{{todo.priority}}">{{todo.value}}</option>
-                    <option class="priority" value="low">Low</option>
-                    <option class="priority" value="medium">Medium</option>
-                    <option class="priority" value="high">High</option>
-                  </select>
-                </div>
-                <div class="time">
-                  <label for="time">Time</label>
-                  <input type="date" name="time" id="time" value="{{todo.time}}"/>
-                </div>
-                <div class="del">
-                  <a href="#" id="del-btn" class="del-btn"> Delete</a>
-                  <a href="#" class="succ-btn">Completed</a>
-                  <button class="save-btn">Save</button>
-                </div>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
         {% endfor %}
       </div>
