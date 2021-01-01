@@ -11,6 +11,8 @@ const taskName = document.querySelectorAll(".task-name");
 const colorPicker = document.querySelector("#color-form");
 const priorities=document.querySelectorAll('.priority');
 const completeBtns=document.querySelectorAll('.succ-btn');
+const completeCheckBox=document.querySelector('#complete');
+
 
 taskAdditionForm.addEventListener("submit", (e) => {
   let todoHTML = `
@@ -127,28 +129,34 @@ for (let d = 0; d < detailForms.length; d++) {
         alert(data.message);
         location.reload();
       });
-
-
-    completeBtns[d].addEventListener('click',()=>{
-        taskName[d].style.textDecoration="line-through";
-        fetch(
-            RESOURCE_URL,
-            {
-                method:"PATCH",
-                body:JSON.stringify({"complete":true}),
-                headers:{"content-type":"application/json"}
-            }
-        ).then(res=>json())
-        .then(data=>console.log(data))
-    })
-    e.preventDefault();
+    
   });
-}
 
+}
 colorPicker.addEventListener("submit", (e) => {
   document.body.style.backgroundColor = new FormData(colorPicker).get("color");
 
   e.preventDefault();
 });
 
+
+for(let i =0; i < todos.length; i++){
+  completeBtns[i].addEventListener('click',()=>{
+    let RESOURCE_URL = `/api/todo/complete/${taskID[i].innerText}`;
+    
+
+    fetch(
+      RESOURCE_URL,
+      {
+        method:"PUT",
+        body:JSON.stringify({complete:true}),
+        headers:{'content-type':'application/json'}
+      }
+    ).then(res=>res.json())
+     .then((data)=>{
+        alert(data.message);
+        todos[i].style.backgroundColor="green";
+     })
+  })
+}
 

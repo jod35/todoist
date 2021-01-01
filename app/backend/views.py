@@ -125,6 +125,27 @@ def replace_todo(id):
         )
     )
 
+@api_bp.route('/todo/complete/<int:id>',methods=['PUT'])
+def complete_a_todo(id):
+    todo=Todo.query.get_or_404(id)
+
+    data=request.get_json()
+
+    todo.complete=data.get('complete')
+
+    db.session.commit()
+
+    response=TodoSchema().dump(todo)
+
+    return make_response(
+        jsonify(
+            {"message":"Todo Complete",
+             "success":True,
+             "todo":response
+            }
+        )
+    )
+
 
 ############################
 ### DELETE A TODO ##########
