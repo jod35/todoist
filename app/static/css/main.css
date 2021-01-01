@@ -75,17 +75,18 @@ nav{
 }
 .task-item{
     display: flex;
-    /* border-radius: 10px; */
+    border-radius: 10px;
     margin:5px;
-    /* cursor: pointer; */
+    cursor: pointer;
     color: white;
     justify-content: space-between;
     background-color: var(--black);
     width: 100%;
     padding: 20px;
+    transition: all 1.2s;
 }
 .task-item:hover{
-    background-color: rgba(0, 0, 0, 0.39);
+    
     color: var(--white);
 }
 
@@ -107,13 +108,19 @@ nav{
     font-size: 2.5;
     font-weight: bold;
 }
-.detail{
-    display: none;
-    color: var(--white);
-    background-color: var(--black)  ;
+.modal{
+    position: fixed;
     width: 100%;
+    height: 100vh;
+    display: none;
+}
+.detail{
+    color: var(--white);
+    background-color: black  ;
     padding: 20px;
-    margin: 0;
+    margin: auto;
+    width: 80%;
+
     border-radius: 10px;
     font-weight: bold;
     
@@ -182,6 +189,14 @@ nav{
     text-decoration: none;
 }
 .save-btn{
+    background-color: dodgerblue;
+    color: white;
+    padding: 10px;
+    border-radius: 7px;
+    text-decoration: none;
+    border: none;
+}
+.cancel-btn{
     background-color: dodgerblue;
     color: white;
     padding: 10px;
